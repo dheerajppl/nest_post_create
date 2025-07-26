@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 export class CreatePostDto {
     @IsString()
@@ -7,6 +7,7 @@ export class CreatePostDto {
     @IsString()
     description: string;
 
+    @IsOptional()
     @IsString()
     createdBy?: string
 }

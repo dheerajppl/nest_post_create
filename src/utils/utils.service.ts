@@ -23,7 +23,11 @@ export class UtilsService {
 
     verifyToken(token: string) {
         try {
-            return jwt.verify(token, process.env.jwtSecretKey);
+            const secretKey = process.env.jwtSecretKey;
+            if (!secretKey) {
+                throw new InternalServerErrorException('JWT secret key is not defined');
+            }
+            return jwt.verify(token, secretKey);
         } catch (error: any) {
             switch (error.name) {
                 case 'TokenExpiredError':
@@ -38,18 +42,26 @@ export class UtilsService {
 
     async createToken(
         data: Record<string, unknown> | Buffer,
-        expiresIn?: string | number,
+        expiresIn?: number,
     ) {
+        const secretKey = process.env.jwtSecretKey;
+        if (!secretKey) {
+            throw new InternalServerErrorException('JWT secret key is not defined');
+        }
         if (!expiresIn)
-            return jwt.sign(data, process.env.jwtSecretKey, { expiresIn: '7d' });
-        else return jwt.sign(data, process.env.jwtSecretKey, { expiresIn });
+            return jwt.sign(data, secretKey, { expiresIn: '7d' });
+        else return jwt.sign(data, secretKey, { expiresIn });
     }
     async createRefreshToken(
         data: Record<string, unknown> | Buffer,
-        expiresIn?: string | number,
+        expiresIn?: number,
     ) {
+        const secretKey = process.env.jwtSecretKey;
+        if (!secretKey) {
+            throw new InternalServerErrorException('JWT secret key is not defined');
+        }
         if (!expiresIn)
-            return jwt.sign(data, process.env.jwtSecretKey, { expiresIn: '7d' });
-        else return jwt.sign(data, process.env.jwtSecretKey, { expiresIn });
+            return jwt.sign(data, secretKey, { expiresIn: '7d' });
+        else return jwt.sign(data, secretKey, { expiresIn });
     }
 }

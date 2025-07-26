@@ -19,10 +19,19 @@ export class UserRepository {
       throw err
     }
   }
+
+  async finUserById(user_id: string) {
+    try {
+      return this.UserModel.findById({ _id: user_id })
+    } catch (err) {
+      console.log("error creating user", err)
+      throw err
+    }
+  }
   async CreateUser(singnUpDto: SignUpDto) {
-    try{
+    try {
       return await this.UserModel.create(singnUpDto)
-    }catch(error){
+    } catch (error) {
       throw error
     }
   }

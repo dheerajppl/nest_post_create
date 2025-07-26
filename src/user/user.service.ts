@@ -11,6 +11,10 @@ export class UserService {
         return this.userRepository.findUser(email)
     }
 
+    async finUserById(user_id: string){
+        return this.userRepository.finUserById(user_id)
+    }
+
     async CreateUser(signupDto: SignUpDto){
         return this.userRepository.CreateUser(signupDto)
     }

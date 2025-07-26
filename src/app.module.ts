@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UtilsModule } from './utils/utils.module';
 import { PostModule } from './post/post.module';
+import { NotificationModule } from './notification/notification.module';
+import { FirebaseModule } from './firebase/firebase.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { PostModule } from './post/post.module';
     AuthModule,
     UtilsModule,
     PostModule,
+    NotificationModule,
+    FirebaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
